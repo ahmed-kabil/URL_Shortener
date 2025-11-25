@@ -45,6 +45,16 @@ red_count_fun();
       setTimeout(() => toast.classList.remove("show"), 2000);
     }
 
+
+     function isValidUrl(string) {
+        try {
+          new URL(string); // Will throw if string is not a valid URL
+          return true;
+        } catch (err) {
+          return false;
+        }
+      }
+
     // ✅ دالة لتقصير الرابط (محاكاة)
     function shortenUrl() {
       const input = document.getElementById("longUrl");
@@ -56,10 +66,10 @@ red_count_fun();
     //   const shorten_btn = document.getElementById("shorten_btn")
     //   console.log(input.value);
 
-        if (!input.value.trim()) {
-        showToast("⚠️ Please enter a valid URL", "#e53935");
+     if(!isValidUrl(input.value.trim())){
+              showToast("⚠️ Please enter a valid URL", "#e53935");
         return;
-      }
+     }
 
 
       let req = {
@@ -121,4 +131,5 @@ function copyUrl() {
        navigator.clipboard.writeText(shortLink)
         .then(() => showToast("✅ Short link copied to clipboard!"))
         .catch(() => showToast("❌ Failed to copy link.", "#e53935")); 
+
       }
